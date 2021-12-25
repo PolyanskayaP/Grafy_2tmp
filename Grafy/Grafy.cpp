@@ -6,12 +6,13 @@
 #include <string>
 using namespace std;
 
-const int v = 3;
+const int v = 4;
 
 void func(int i, int* color, int(*B)[v * v], string rezP, int n) {
 	string rez = rezP;
 	rez = rez + to_string(i);
 	color[i] = 1;
+
 	//poisk vershini FOR!
 	for (int k = 0; k < v * v; k++) {
 		if (B[i][k] == 1) {
@@ -19,38 +20,51 @@ void func(int i, int* color, int(*B)[v * v], string rezP, int n) {
 			for (j = 0; j < v; j++) {
 				if (B[j][k] == -1) break;
 			}//  i->j  duga, j-smej versh 
-			cout <<" @" << rez << "@ ";
+	//		cout <<" @" << rez <<"/"<< count << "@ ";
 			
 			//nashli vershinu
-			if (color[j] == 0) {
-				color[j] = 1;
+
+			if (rez.size()<v && j + 48 != rez[0] && color[j]==0) {
 				func(j, color, B, rez, n);
 			}
 			else {
-				//rez = rez + to_string(j);
-				//<=9   //a na bOlshem kak budet?  //matr vesov sdelay
+				//<=9   //a na bOlshem kak budet?  //matr vesov sdelay(+2oy putb')+ABCD
 				int ch = j + 48;
-				if (rez.size() == n /*+ 1*/  && rez[0] == ch /*rez[rez.size() - 1]*/)
+				if (rez.size() == n && rez[0] == ch )
 					cout << rez << endl;
 			}
 		}
-	}	//color[i]=2;
+	}	
+	color[i] = 0;
 }
 
 int main() {
-	//char s[v];
 	int n;
 	string s = "";
-	int B[v][v * v] = { {0,-1,-1,0,0,0,1,0,0},
-			   {0,1,0,0,0,-1,0,0,0},
-			   {0,0,1,0,0,1,-1,0,0} };
-	int color[v] = { 0,0,0 };
+/*	int B[v][v * v] = {{0,-1,-1,0,0,0,1,0,0},
+						 {0,1,0,0,0,-1,0,0,0},
+						 {0,0,1,0,0,1,-1,0,0} };
+	int color[v] = { 0,0,0 }; */
+
+	int B[v][v * v] = {{0,1,0,1, 0,0,0,0, -1,0,0,0, 0,0,0,0},
+						{0,-1,0,0, 0,0,1,1, 0,0,0,0, 0,-1,0,0},
+						{0,0,0,0, 0,0,-1,0, 1,0,0,0, 0,0,-1,0},
+						{0,0,0,-1, 0,0,0,-1, 0,0,0,0, 0,1,1,0} }; 
+	int color[v] = { 0,0,0,0 };
+
+/*	int B[v][v * v] = {{0,1,1,1,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, -1,0,0,0,0},
+						{0,-1,0,0,0, 0,0,1,0,1, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0}, 
+						{0,0,-1,0,0, 0,0,-1,0,0, 0,0,0,1,1, 0,0,-1,0,0, 0,0,0,0,0},
+						{0,0,0,-1,0, 0,0,0,0,0, 0,0,0,-1,0, 0,0,1,0,1, 0,0,0,0,0},
+						{0,0,0,0,0, 0,0,0,0,-1, 0,0,0,0,-1, 0,0,0,0,-1, 1,0,0,0,0} };
+	int color[v] = { 0,0,0,0,0 }; */
 
 	cout << "what length of cycle?" << endl;
 	cin >> n;
 
 	for (int i = 0; i < v; i++) {
-		if (color[i] == 0) func(i, color, B, s, n);
+		func(i, color, B, s, n);
+		color[i] = 2;
 	}
 
 }
