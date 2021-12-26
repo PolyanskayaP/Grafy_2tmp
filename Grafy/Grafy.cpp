@@ -8,7 +8,7 @@ using namespace std;
 
 const int v = 5;
 
-void func(int i, int* color, int(*B)[v * v], string rezP, int n, /*int sumP*/ int(*VesaD)[v], int oldj) {
+void func(int i, int* color, int(*B)[v * v], string rezP, int n, int(*VesaD)[v], int oldj) {
 	string rez = rezP;
 	rez = rez + to_string(i);
 	color[i] = 1;
@@ -55,13 +55,13 @@ int main() {
 	*/
 
 	/*int B[v][v * v] = {{0,1,0,1, 0,0,0,0, -1,0,0,0, 0,0,0,0},
-						{0,-1,0,0, 0,0,1,1, 0,0,0,0, 0,-1,0,0},
-						{0,0,0,0, 0,0,-1,0, 1,0,0,0, 0,0,-1,0},
+						{0,-1,0,0, 0,0,1,1, 0,-1,0,0, 0,-1,0,0},
+						{0,0,0,0, 0,0,-1,0, 1,1,0,0, 0,0,-1,0},
 						{0,0,0,-1, 0,0,0,-1, 0,0,0,0, 0,1,1,0} }; 
 	int color[v] = { 0,0,0,0 };
 	int VesaD[v][v] = { {-1,3,-1,1},
 						{-1,-1,2,1},
-						{2,-1,-1,-1},
+						{2,2,-1,-1},
 						{-1,1,2,-1} }; */
 
 	int B[v][v * v] = {{0,1,1,1,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, -1,0,0,0,0},
@@ -76,7 +76,6 @@ int main() {
 					   {-1,-1,-1,1,2},
 					   {-1,-1,1,-1,3},
 					   {1,-1,-1,-1,-1}};
-	
 
 	cout << "what length of cycle?" << endl;
 	cin >> n;
